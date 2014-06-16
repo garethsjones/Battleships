@@ -11,15 +11,16 @@ class Tile
     @is_bombarded = false
   end
   
+  def name; @name; end
   def bombard; @is_bombarded = true; end
-  def occupied?; @ship != nil; end
+  def occupied?; @is_occupied; end
   def bombarded?; @is_bombarded; end
   
-  def occupy(ship)
+  def occupy
     if occupied?
-      raise "Tile #{@name} is already occupied by #{@ship.type}"
+      raise "Tile #{@name} is already occupied"
     end
-    @ship = ship
+    @is_occupied = true
   end
   
   def status(show_hidden = false)

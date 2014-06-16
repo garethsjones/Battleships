@@ -10,17 +10,8 @@ class TestFleet < MiniTest::Unit::TestCase
   def setup
     @board = Board.new(5, 5)
     @fleet = Fleet.new(@board)
-    
-    @ship3 = Ship.new
-    @fleet.add @ship3
-    @ship3.moor 'B2'
-    @ship3.moor 'B3'
-    @ship3.moor 'B4'
-    
-    @ship2 = Ship.new
-    @fleet.add @ship2
-    @ship2.moor 'D1'
-    @ship2.moor 'E1'
+    @ship3 = Ship.new(@fleet, 'B2', 'B3', 'B4')
+    @ship2 = Ship.new(@fleet, 'D1', 'E1')
   end
 
   def test_afloat

@@ -5,5 +5,6 @@ class Border
   end
   
   def status(show_hidden = false); @label; end
+  def name; @label; end
   
 end

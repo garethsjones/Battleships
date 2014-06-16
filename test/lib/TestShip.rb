@@ -10,15 +10,7 @@ class TestShip < MiniTest::Unit::TestCase
   def setup
     @board = Board.new(3, 3)
     @fleet = Fleet.new(@board)
-    @ship = Ship.new
-    @fleet.add @ship
-    @ship.moor 'A0'
-    @ship.moor 'A1'
-  end
-  
-  def test_status_ship_with_no_moorings
-    ship = Ship.new
-    assert_equal(SHIP_STATUS_SUNK, ship.status)
+    @ship = Ship.new(@fleet, 'A0', 'A1')
   end
   
   def test_status_ship_with_no_hits

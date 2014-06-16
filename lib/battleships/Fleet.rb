@@ -8,7 +8,6 @@ class Fleet
   def board; @board; end
   
   def add(ship)
-    ship.join_fleet self
     @ships.push ship
     @ships.sort!
   end

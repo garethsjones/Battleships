@@ -17,10 +17,9 @@ class Board
     for x in 0..@width + 1
       
       @board[x] = Array.new(@height + 2)
+      x_name = (64 + x).chr
       
       for y in 0..@height + 1
-        
-        x_name = (64 + x).chr
         
         if ((x == 0 || x == @width + 1) && (y == 0 || y == @height + 1))
           @board[x][y] = Border.new(' ')
@@ -41,8 +40,8 @@ class Board
   def status(show_hidden = false) 
     status = ''
     
-    for x in 0..@width + 1
-      for y in 0..@height + 1
+    for y in 0..@height + 1
+      for x in 0..@width + 1
         status += @board[x][y].status(show_hidden)       
       end
       status += "\n"
@@ -51,29 +50,29 @@ class Board
     return status
   end
   
-  def contiguous?(tiles)
-    for x in 0..@width + 1
-      for y in 0..@height + 1
-        if tiles.include? @board[x][y]
-          return (row_occupied(x, y, tiles) || column_occupied(x, y, tiles))
+  def contiguous?(tile_names)
+    for x in 1..@width + 1
+      for y in 1..@height + 1
+        if tile_names.include? @board[x][y].name
+          return (row_occupied(x, y, tile_names) || column_occupied(x, y, tile_names))
         end     
       end
     end
     return false
   end
   
-  def row_occupied(x, y, tiles)
-    for y_delta in 0..tiles.size - 1
-      if !tiles.include? @board[x][y + y_delta]
+  def row_occupied(x, y, tile_names)
+    for y_delta in 0..tile_names.size - 1
+      if !tile_names.include? @board[x][y + y_delta].name
         return false
       end
     end
     return true
   end
   
-  def column_occupied(x, y, tiles)
-    for x_delta in 0..tiles.size - 1
-      if !tiles.include? @board[x + x_delta][y]
+  def column_occupied(x, y, tile_names)
+    for x_delta in 0..tile_names.size - 1
+      if !tile_names.include? @board[x + x_delta][y].name
         return false
       end
     end

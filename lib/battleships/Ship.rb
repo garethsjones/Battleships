@@ -5,12 +5,18 @@ SHIP_STATUS_SUNK    = 'Sunk'
 
 class Ship
   
-  def initialize()
-    @tiles = Set.new
-  end
-  
-  def join_fleet(fleet)
+  def initialize(fleet, *tile_names)
     @fleet = fleet
+    @tiles = Set.new
+    
+    if !@fleet.board().contiguous?(tile_names)
+      raise "Tiles are not contiguous"
+    end
+    
+    tile_names.each do |tile_name|
+      moor tile_name
+    end
+    @fleet.add self
   end
   
   def status
@@ -40,15 +46,11 @@ class Ship
     end
     
     @tiles.add tile
-    tile.occupy self
+    tile.occupy
   end
   
   def length
     @tiles.length
-  end
-  
-  def valid?
-    return @fleet.board().contiguous?(@tiles)
   end
   
   def <=> other
