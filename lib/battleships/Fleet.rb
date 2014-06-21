@@ -1,5 +1,9 @@
 class Fleet
   
+  SHOT_RESULT_MISS = 'Miss'
+  SHOT_RESULT_HIT = 'Hit!'
+  SHOT_RESULT_SINK = 'You sunk my battleship!!'
+  
   def initialize(board)
     @board = board
     @ships = Array.new
@@ -16,7 +20,7 @@ class Fleet
     afloat = 0
     
     @ships.each do |ship|
-      if ship.status == SHIP_STATUS_AFLOAT
+      if ship.status == Ship::STATUS_AFLOAT
         afloat += 1
       end
     end
@@ -28,7 +32,7 @@ class Fleet
     sunk = 0
     
     @ships.each do |ship|
-      if ship.status == SHIP_STATUS_SUNK
+      if ship.status == Ship::STATUS_SUNK
         sunk += 1
       end
     end
@@ -48,7 +52,7 @@ class Fleet
     status = ''
     
     @ships.each do |ship|
-      status += "#{ship.type} Damage: #{ship.damage}/#{ship.length} Status: #{ship.status}\n"
+      status += "#{'%-16.16s' % ship.type} Damage: #{ship.damage}/#{ship.length} Status: #{ship.status}\n"
     end
     
     return status
@@ -56,6 +60,31 @@ class Fleet
   
   def all_sunk?
     return size() == sunk()
+  end
+  
+  def shoot(tile_name)
+    
+    tile = @board.get(tile_name)
+    
+    if tile == nil
+      return SHOT_RESULT_MISS
+    end
+    
+    @board.bombard tile_name
+    
+    if !tile.occupied?
+      return SHOT_RESULT_MISS
+    end
+    
+    @ships.each do |ship|
+      if ship.is_moored_at tile_name
+        if ship.status == Ship::STATUS_AFLOAT
+          return SHOT_RESULT_HIT
+        else
+          return SHOT_RESULT_SINK
+        end
+      end
+    end
   end
   
 end

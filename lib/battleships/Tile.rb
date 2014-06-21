@@ -1,9 +1,9 @@
-TILE_STATUS_HIT      = '#'
-TILE_STATUS_HIDDEN   = 'O'
-TILE_STATUS_MISSED   = '-'
-TILE_STATUS_UNKNOWN  = ' '
-
 class Tile
+  
+  STATUS_HIT      = '#'
+  STATUS_HIDDEN   = 'O'
+  STATUS_MISSED   = '-'
+  STATUS_UNKNOWN  = ' '
   
   def initialize(name)
     @name = name
@@ -25,13 +25,13 @@ class Tile
   
   def status(show_hidden = false)
     if occupied? && bombarded?
-      TILE_STATUS_HIT
+      STATUS_HIT
     elsif bombarded?
-      TILE_STATUS_MISSED
+      STATUS_MISSED
     elsif occupied? && show_hidden
-      TILE_STATUS_HIDDEN
+      STATUS_HIDDEN
     else
-      TILE_STATUS_UNKNOWN
+      STATUS_UNKNOWN
     end
   end
   

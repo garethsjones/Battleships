@@ -52,4 +52,10 @@ class TestFleet < MiniTest::Unit::TestCase
     @board.bombard 'B4'
     assert_equal("Patrol Boat Damage: 2/2 Status: Sunk\nDestroyer Damage: 2/3 Status: Afloat\n", @fleet.status)
   end
+  
+  def test_shot_status
+    assert_equal(Fleet::SHOT_RESULT_MISS, @fleet.shoot('B0'))
+    assert_equal(Fleet::SHOT_RESULT_HIT, @fleet.shoot('D1'))
+    assert_equal(Fleet::SHOT_RESULT_SINK, @fleet.shoot('E1'))
+  end
 end

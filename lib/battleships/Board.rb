@@ -9,6 +9,9 @@ class Board
     initialize_board
   end
   
+  def width; @width; end
+  def height; @height; end
+  
   def initialize_board
     
     @board = Array.new(@width + 2)
@@ -81,6 +84,10 @@ class Board
   
   def get(tile_name)
     return @tiles[tile_name]
+  end
+  
+  def get_coord(x, y)
+    return @board[x + 1][y + 1]
   end
   
   def bombard(tile_name)

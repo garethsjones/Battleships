@@ -9,28 +9,28 @@ class TestTile < MiniTest::Unit::TestCase
   end
   
   def test_must_initialize_as_unknown
-    assert_equal(TILE_STATUS_UNKNOWN, @tile.status)
+    assert_equal(Tile::STATUS_UNKNOWN, @tile.status)
   end
   
   def test_must_show_as_unknown_when_occupied
     @tile.occupy
-    assert_equal(TILE_STATUS_UNKNOWN, @tile.status)
+    assert_equal(Tile::STATUS_UNKNOWN, @tile.status)
   end
   
   def test_must_show_as_occupied_when_occupied_and_showing_hidden
     @tile.occupy
-    assert_equal(TILE_STATUS_HIDDEN, @tile.status(true))
+    assert_equal(Tile::STATUS_HIDDEN, @tile.status(true))
   end
   
   def test_must_show_as_missed_when_not_occupied_and_bombarded
     @tile.bombard
-    assert_equal(TILE_STATUS_MISSED, @tile.status)
+    assert_equal(Tile::STATUS_MISSED, @tile.status)
   end
   
   def test_must_show_as_hit_when_occupied_and_bombarded
     @tile.occupy
     @tile.bombard
-    assert_equal(TILE_STATUS_HIT, @tile.status)
+    assert_equal(Tile::STATUS_HIT, @tile.status)
   end
   
   def test_must_raise_error_when_occupying_an_occupied_tile
