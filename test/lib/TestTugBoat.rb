@@ -13,10 +13,13 @@ class TestTugBoat < MiniTest::Unit::TestCase
   end
   
   def test
-    @tugBoat.dock 2
-    @tugBoat.dock 3
+    @tugBoat.auto_pilot 2, 3
     puts @fleet.board().status(true)
     puts @fleet.status()
+  end
+  
+  def test_manual
+    @tugBoat.manual_pilot 2, 3
   end
   
 end

@@ -6,22 +6,70 @@ class TugBoat
     @fleet = fleet
   end
   
-  def dock(ship_length)
+  def manual_pilot(*ship_lengths)
     
-    if rand(0..1) == 0
-      success = place_horizontally(ship_length) 
-      if !success
-        success = place_vertically(ship_length)
-      end
-    else
-      success = place_vertically(ship_length)
-      if !success
-        success = place_horizontally(ship_length)
+    ship_lengths.sort!.reverse!
+    board = @fleet.board
+    
+    ship_lengths.each do |ship_length|
+      while true
+        puts board.status(true)
+        puts "Position ship of length #{ship_length}"
+        positions = gets.strip.split
+        
+        if (positions.length != ship_length)
+          puts "I asked for #{ship_length} coords but you gave me #{positions.length}"
+          next
+        end
+        
+        all_available = true
+        positions.each do |position|
+          if board.get position == nil
+            puts "Position #{position} is not regocnised"
+          end
+          if (board.get(position).occupied?)
+            puts "Position #{position} is already occupied."
+            all_available = false
+          end
+        end
+        
+        if !all_available
+          next
+        end
+        
+        if !board.contiguous? positions
+          puts "Those coords don't join up in a straight line. Try again."
+          next
+        end
+        
+        Ship.new(@fleet, *positions)
+        break
+        
       end
     end
     
-    if !success
-      raise "Unable to place ship on board"
+  end
+  
+  def auto_pilot(*ship_lengths)
+    
+    ship_lengths.sort!.reverse!
+    
+    ship_lengths.each do |ship_length|
+      if rand(0..1) == 0
+        success = place_horizontally(ship_length) 
+        if !success
+          success = place_vertically(ship_length)
+        end
+      else
+        success = place_vertically(ship_length)
+        if !success
+          success = place_horizontally(ship_length)
+        end
+      end
+      
+      if !success
+        raise "Unable to place ship length #{ship_length} on board"
+      end
     end
   end
   

@@ -90,6 +90,16 @@ class Board
     return @board[x + 1][y + 1]
   end
   
+  def get_coords_from_name(tile_name)
+    (1..@width - 1).each do |x|
+      (1..@height - 1).each do |y|
+        if @board[x][y].name == tile_name
+          return [x - 1, y - 1]
+        end
+      end
+    end
+  end
+  
   def bombard(tile_name)
     get(tile_name).bombard
   end

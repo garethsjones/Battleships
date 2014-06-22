@@ -11,11 +11,7 @@ class SinglePlayerGame
     fleet = Fleet.new(board)
     tugBoat = TugBoat.new(fleet)
     
-    tugBoat.dock 5
-    tugBoat.dock 4
-    tugBoat.dock 3
-    tugBoat.dock 3
-    tugBoat.dock 2
+    tugBoat.auto_pilot 5, 4, 3, 3, 2
     
     shots = 0
     
@@ -32,7 +28,10 @@ class SinglePlayerGame
       puts fleet.summary
       
       puts "You've had #{shots} shots"
+      puts ''
     end
+    
+    puts "You sunk the entire fleet in #{shots} shots!!!"
     
   end
   
