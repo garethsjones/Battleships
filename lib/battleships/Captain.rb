@@ -23,7 +23,9 @@ class Captain
   end
   
   def hunt
-    hit1 = @hits[0]; x1 = hit1[0]; y1 = hit1[1]
+    hit1 = @hits[0];
+    x1 = hit1[0];
+    y1 = hit1[1]
     hitn = @hits[@hits.length - 1]; xn = hitn[0]; yn = hitn[1]
     
     targets = []

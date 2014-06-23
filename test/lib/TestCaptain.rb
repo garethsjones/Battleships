@@ -67,4 +67,5 @@ class TestCaptain < MiniTest::Unit::TestCase
     @captain.report_hit 'B1'
     assert_equal('B2', @captain.target)
   end
+
 end

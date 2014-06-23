@@ -1,11 +1,11 @@
 require 'minitest/autorun'
 
-require '../../lib/battleships/SinglePlayerGame'
+require '../../../lib/battleships/play/SingleCpuGame'
 
 class TestSinglePlayerGame < MiniTest::Unit::TestCase
   
   def test
-    game = SinglePlayerGame.new
+    game = SingleCpuGame.new
     game.main
   end
   

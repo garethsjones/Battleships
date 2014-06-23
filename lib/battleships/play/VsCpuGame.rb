@@ -1,10 +1,10 @@
-require_relative 'Ship'
-require_relative 'Board'
-require_relative 'Fleet'
-require_relative 'TugBoat'
-require_relative 'Captain'
+require_relative '../Ship'
+require_relative '../Board'
+require_relative '../Fleet'
+require_relative '../TugBoat'
+require_relative '../Captain'
 
-class VsComputerGame
+class VsCpuGame
   
   def main
     

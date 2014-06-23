@@ -1,7 +1,7 @@
-require_relative 'Ship'
-require_relative 'Board'
-require_relative 'Fleet'
-require_relative 'TugBoat'
+require_relative '../Ship'
+require_relative '../Board'
+require_relative '../Fleet'
+require_relative '../TugBoat'
 
 class SinglePlayerGame
   
